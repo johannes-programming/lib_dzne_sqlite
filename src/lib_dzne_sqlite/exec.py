@@ -1,8 +1,8 @@
-import sys
+import sys as _sys
 
-import pandas as pd
+import lib_dzne_sqlite.fmt as _fmt
+import pandas as _pd
 
-from . import cmd, fmt
 from .Where import Where
 
 
@@ -42,9 +42,9 @@ def _main(*, cursor, command, values):
 def insert(*, cursor, table, row):
     row = dict(row)
     command = "INSERT INTO "
-    command += fmt.name(table)
+    command += _fmt.name(table)
     command += "("
-    command += ", ".join(fmt.name(k) for k in row.keys())
+    command += ", ".join(_fmt.name(k) for k in row.keys())
     command += ")"
     command += " VALUES "
     command += "("
@@ -64,17 +64,12 @@ def update(*, cursor, table, row, where):
     #where = dict(where)
     row = dict(row)
     command = "UPDATE "
-    command += fmt.name(table)
+    command += _fmt.name(table)
     command += " SET "
-    command += ", ".join(f"{fmt.name(k)} = ?" for k in row.keys())
+    command += ", ".join(f"{_fmt.name(k)} = ?" for k in row.keys())
     command += " "
     command += where.command
     command += ";"
-    #print('table', table, file=sys.stderr)
-    #print('row', row, file=sys.stderr)
-    #print('where', where, file=sys.stderr)
-    #print(command, list(row.values()) + where.values, file=sys.stderr)
-    #print(file=sys.stderr)
     _main(
         cursor=cursor,
         command=command,
@@ -95,9 +90,9 @@ def select(*, cursor, table, columns, where={}):
             raise ValueError("The columns-list is invalid! ")
         command += '*'
     else:
-        command += ", ".join(fmt.name(c) for c in columns)
+        command += ", ".join(_fmt.name(c) for c in columns)
     command += " FROM "
-    command += fmt.name(table)
+    command += _fmt.name(table)
     command += " "
     command += where.command#cmd.where(where.keys())
     command += ";"
@@ -108,7 +103,7 @@ def select(*, cursor, table, columns, where={}):
     )
     if '*' in columns:
         columns = [descriptor[0] for descriptor in cursor.description]
-    return pd.DataFrame(data=cursor.fetchall(), columns=columns)
+    return _pd.DataFrame(data=cursor.fetchall(), columns=columns)
 
 
 

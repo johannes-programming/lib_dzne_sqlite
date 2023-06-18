@@ -1,6 +1,7 @@
-import pandas as pd
+import sys as _sys
 
-from . import fmt
+import lib_dzne_math.na as _na
+import lib_dzne_sqlite.fmt as _fmt
 
 
 class Where:
@@ -19,21 +20,21 @@ class Where:
         is_not_null = list(is_not_null)
         conditions = list()
         for k, v in row.items():
-            condition = fmt.name(k)
+            condition = _fmt.name(k)
             if type(v) in (tuple, list, set, frozenset):
                 options = list(set(v))
                 condition += " IN ("
                 condition += ', '.join(['?'] * len(options))
                 condition += ")"
                 self._values += options
-            elif pd.isna(v):
+            elif _na.isna(v):
                 condition += " IS NULL"
             else:
                 condition += " = ?"
                 self._values.append(v)
             conditions.append(condition)
         for k in is_not_null:
-            condition = fmt.name(k)
+            condition = _fmt.name(k)
             condition += " IS NOT NULL"
             conditions.append(condition)
         if len(conditions) == 0:

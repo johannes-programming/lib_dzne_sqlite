@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "lib-dzne-sqlite"
-version = "0.2.0"
+version = "0.2.1"
 description = "Libary for handling sqlite. "
 license = { file = "LICENSE" }
 authors = [{ name = "Johannes Horler", email = "johannes.horler@dzne.de" }]
@@ -16,7 +16,7 @@ classifiers = [
 ]
 keywords = []
 dependencies = [
-    'pandas>=1.4.2',
+    'lib-dzne-math>=0.2.3',
 ]
 requires-python = ">=3.11"
 
