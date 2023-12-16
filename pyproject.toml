@@ -6,9 +6,9 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "lib_dzne_sqlite"
-version = "0.2.2"
+version = "0.2.3"
 description = "Libary for handling sqlite. "
-readme = "README.md"
+readme = "README.rst"
 authors = [
     { name = "Johannes", email = "johannes-programming@posteo.org" },
 ]
@@ -19,7 +19,7 @@ classifiers = [
 ]
 keywords = []
 dependencies = [
-    "na_quantors>=1.0.0",
+    "na_quantors>=1.0",
 ]
 requires-python = ">=3.11"
 
