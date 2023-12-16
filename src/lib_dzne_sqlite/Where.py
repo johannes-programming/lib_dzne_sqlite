@@ -1,6 +1,7 @@
 import sys as _sys
 
-import lib_dzne_math.na as _na
+import na_quantors as _na
+
 import lib_dzne_sqlite.fmt as _fmt
 
 

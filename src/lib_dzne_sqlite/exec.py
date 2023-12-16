@@ -1,7 +1,8 @@
 import sys as _sys
 
-import lib_dzne_sqlite.fmt as _fmt
 import pandas as _pd
+
+import lib_dzne_sqlite.fmt as _fmt
 
 from .Where import Where
 
